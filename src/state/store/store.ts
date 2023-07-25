@@ -11,10 +11,11 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import appReducer from './reducers/appReducer';
+import { appReducer, settingsReducer } from 'state/slices';
 
 const rootReducer = combineReducers({
   app: appReducer,
+  settings: settingsReducer,
 });
 
 const persistConfig = {
@@ -32,11 +33,9 @@ const middlewareConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(middlewareConfig),
 });
 
 export const persistor = persistStore(store);
-
-export default store;

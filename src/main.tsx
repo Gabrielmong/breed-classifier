@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Provider } from 'react-redux';
-import store, { persistor } from './state/store';
+import { persistor, store } from './state/store/';
 import { PersistGate } from 'redux-persist/integration/react';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

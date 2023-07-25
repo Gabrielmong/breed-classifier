@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-type AppState =
+export type AppState =
   | 'loadingModel'
   | 'modelReady'
   | 'imageReady'
@@ -10,45 +10,48 @@ type Result = {
   className: string;
   probability: number;
 };
-type AppSliceState = {
+type ModelSliceState = {
   results: Result[];
   imageURL: string | undefined;
   model: any;
   appState: AppState;
 };
 
-const initialState: AppSliceState = {
+const initialState: ModelSliceState = {
   results: [],
   imageURL: undefined,
   model: undefined,
   appState: 'loadingModel',
 };
 
-const appSlice = createSlice({
+const modelSlice = createSlice({
   name: 'app',
   initialState: initialState,
   reducers: {
-    setResults: (state: AppSliceState, action: PayloadAction<Result[]>) => {
+    setResults: (state: ModelSliceState, action: PayloadAction<Result[]>) => {
       state.results = action.payload;
     },
     setImageURL: (
-      state: AppSliceState,
+      state: ModelSliceState,
       action: PayloadAction<string | undefined>,
     ) => {
       state.imageURL = action.payload;
     },
-    setModel: (state: AppSliceState, action: PayloadAction<any>) => {
+    setModel: (state: ModelSliceState, action: PayloadAction<any>) => {
       state.model = action.payload;
     },
-    setAppState: (state: AppSliceState, action: PayloadAction<AppState>) => {
+    setModelState: (
+      state: ModelSliceState,
+      action: PayloadAction<AppState>,
+    ) => {
       state.appState = action.payload;
     },
   },
 });
 
-export const { setResults, setImageURL, setModel, setAppState } =
-  appSlice.actions;
+export const { setResults, setImageURL, setModel, setModelState } =
+  modelSlice.actions;
 
-export default appSlice.reducer;
+export const appReducer = modelSlice.reducer;
 
-export const selectResults = (state: { app: AppSliceState }) => state.app;
+export const selectResults = (state: { app: ModelSliceState }) => state.app;
