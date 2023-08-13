@@ -1,4 +1,4 @@
-import { OPENAI_API_KEY, OPENAI_API_URL } from 'data/constants';
+import { OPENAI_API_KEY } from 'data/constants';
 import { Configuration, OpenAIApi } from 'openai';
 
 const configuration = new Configuration({
@@ -12,7 +12,7 @@ export const useAIDescription = () => {
     const prompt = `This is a small description of a dog breed. The breed is ${breed}. The description is:`;
     const result = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
-      max_tokens: 100,
+      max_tokens: 120,
       messages: [
         {
           role: 'user',
@@ -21,7 +21,12 @@ export const useAIDescription = () => {
       ],
     });
 
-    return result.data.choices[0].message?.content;
+    const description = result.data.choices[0].message?.content?.split('.');
+    description?.pop();
+
+    description?.push(`${description?.pop()}.`);
+
+    return description?.join('. ') || '';
   };
 
   return { getDescription };

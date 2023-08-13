@@ -7,7 +7,7 @@ import {
 } from 'state';
 import { useSelector, useDispatch } from 'react-redux';
 import * as mobilenet from '@tensorflow-models/mobilenet';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { checkForAnimal } from 'utils';
 import { useAIDescription } from './useAIDescription';
 

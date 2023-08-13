@@ -1,24 +1,16 @@
 import { Container } from '@mui/material';
-import { classesMap, DOG_API_URL, API_KEY } from 'data';
-import * as mobilenet from '@tensorflow-models/mobilenet';
-import { useState, useRef, useCallback, ChangeEvent, useEffect } from 'react';
+import { DOG_API_URL, API_KEY } from 'data';
+import { useState, useRef, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectResults,
-  setImageURL,
-  setModelState,
-  setModel,
-  setResults,
-} from 'state';
+import { selectResults, setImageURL, setModelState } from 'state';
 import { LoadingScreen, TopGrid } from 'components';
 import { BreedInfoSection } from 'components/BreedInfoSection/BreedInfoSection';
-import { useModel, useAIDescription } from 'hooks';
+import { useModel } from 'hooks';
 import { formatBreed } from 'utils';
 
 export const Identify = () => {
   const {
-    apiResponse,
     breed,
     identify,
     imageURL,
@@ -29,7 +21,6 @@ export const Identify = () => {
     reset,
     results,
     setApiResponse,
-    setBreed,
     setLoading,
     setNoInfoFound,
     handleUpload,
