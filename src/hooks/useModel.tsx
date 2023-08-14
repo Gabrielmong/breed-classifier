@@ -11,15 +11,21 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { checkForAnimal } from 'utils';
 import { useAIDescription } from './useAIDescription';
 
+type apiResponse = {
+  [key: string]: string;
+};
+
 export const useModel = () => {
   const { getDescription } = useAIDescription();
   const dispatch = useDispatch();
   const { results, imageURL, model, appState } = useSelector(selectResults);
   const [loadingNote, setLoadingNote] = useState<string | null>(null);
-  const [breed, setBreed] = useState<any>(null);
+  const [breed, setBreed] = useState<unknown>(null);
   const [loading, setLoading] = useState(false);
   const [noInfoFound, setNoInfoFound] = useState(false);
-  const [apiResponse, setApiResponse] = useState<any>(null);
+  const [apiResponse, setApiResponse] = useState<
+    apiResponse | null | undefined
+  >(null);
   const [, setInputFile] = useState<File | undefined>(undefined);
 
   const loadModel = async () => {
@@ -68,10 +74,18 @@ export const useModel = () => {
           return returnedBreed;
         case 'cat':
           setLoadingNote('This is a cat, we do not have info on cats yet.');
+          setBreed({
+            name: returnedBreed,
+          });
+          setNoInfoFound(true);
           setLoading(false);
           return 'cat';
         default:
           setLoading(false);
+          setNoInfoFound(true);
+          setBreed({
+            name: returnedBreed,
+          });
           return false;
       }
     } else {

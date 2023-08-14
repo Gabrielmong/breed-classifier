@@ -7,7 +7,8 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { Image } from '@mui/icons-material';
-import { AppState } from 'state';
+import { AppState, Result } from 'state';
+import { DropzoneRootProps } from 'react-dropzone';
 
 type ActionButton = {
   [key: string]: {
@@ -31,7 +32,7 @@ export const TopGrid = ({
   reset,
 }: {
   appState: AppState;
-  getRootProps: () => any;
+  getRootProps: () => DropzoneRootProps;
   handleIdentify: () => void;
   handleUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
   imageRef: React.RefObject<HTMLImageElement>;
@@ -39,7 +40,7 @@ export const TopGrid = ({
   inputRef: React.RefObject<HTMLInputElement>;
   loadModel: () => void;
   loading: boolean;
-  results: any[];
+  results: Result[];
   upload: () => void;
   reset: () => void;
 }) => {
@@ -62,7 +63,6 @@ export const TopGrid = ({
           justifyContent: 'center',
           alignItems: 'center',
           height: '50vh',
-          padding: 2,
         }}
       >
         {imageURL ? (
@@ -128,11 +128,18 @@ export const TopGrid = ({
           justifyContent: 'center',
           alignItems: 'center',
           height: '50vh',
-          padding: 2,
         }}
-        spacing={2}
       >
-        <Grid container justifyContent="center" alignItems="center" spacing={2}>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            height: '100%',
+            minWidth: '100%',
+          }}
+          spacing={2}
+        >
           {results.length > 0 && (
             <Grid item xs={12}>
               <Card
@@ -141,7 +148,7 @@ export const TopGrid = ({
                   flexDirection: 'column',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '100%',
+                  minHeight: '100%',
                   width: '100%',
                   padding: 2,
                   borderRadius: 5,
@@ -177,6 +184,56 @@ export const TopGrid = ({
                 </Button>
               </Card>
             </Grid>
+          )}
+
+          {!imageURL && (
+            <>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  height: '50%',
+                }}
+              >
+                <Card
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    padding: 2,
+                    height: '100%',
+                  }}
+                >
+                  <Typography variant="h6" align="center">
+                    Upload an image to get started
+                  </Typography>
+                </Card>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  height: '50%',
+                }}
+              >
+                <Card
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    padding: 2,
+                    height: '100%',
+                  }}
+                >
+                  <Typography variant="h6" align="center">
+                    This model can identify 130 different dog breeds
+                  </Typography>
+                </Card>
+              </Grid>
+            </>
           )}
         </Grid>
       </Grid>

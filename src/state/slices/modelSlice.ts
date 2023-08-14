@@ -6,7 +6,7 @@ export type AppState =
   | 'imageReady'
   | 'identifying'
   | 'complete';
-type Result = {
+export type Result = {
   className: string;
   probability: number;
 };

@@ -27,7 +27,7 @@ export const Identify = () => {
   } = useModel();
   const { appState } = useSelector(selectResults);
   const [, setInputFile] = useState<File | undefined>(undefined);
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps } = useDropzone({
     maxFiles: 1,
     onDrop: (acceptedFiles) => {
       setInputFile(acceptedFiles[0]);

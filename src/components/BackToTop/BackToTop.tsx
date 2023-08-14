@@ -1,4 +1,3 @@
-import { IconButton } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ReactElement, useState, useEffect } from 'react';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -17,7 +16,6 @@ export const BackToTop = (): ReactElement => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleBackToTop = () => {

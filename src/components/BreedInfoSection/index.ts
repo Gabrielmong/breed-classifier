@@ -1,0 +1,1 @@
+export { BreedInfoSection } from './BreedInfoSection';

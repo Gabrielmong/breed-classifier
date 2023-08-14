@@ -2,3 +2,8 @@ export * from './Topbar';
 export * from './LoadingScreen';
 export * from './TopGrid';
 export * from './BackToTop';
+export * from './Ratings';
+export * from './BreedInfoSection';
+export * from './TitleDescription';
+export * from './AdditionalInformation';
+export * from './NoInfoFound';
